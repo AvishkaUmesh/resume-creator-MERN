@@ -5,6 +5,8 @@ exports.login = async (req, res) => {
 		const user = await User.findOne({ username: req.body.username, password: req.body.password });
 		if (user) {
 			res.status(200).json(user);
+		} else {
+			res.status(404).send('user not found');
 		}
 	} catch (error) {
 		res.status(500).json(error);
