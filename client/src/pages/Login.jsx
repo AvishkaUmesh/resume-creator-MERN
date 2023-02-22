@@ -1,13 +1,22 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import '../assets/css/authentication.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
-	const onFinish = (values) => {
-		console.log('Success:', values);
+	const navigate = useNavigate();
+	const onFinish = async (values) => {
+		try {
+			const user = await axios.post('/auth/login', values);
+			message.success('Login successful');
+			localStorage.setItem('user', JSON.stringify(user));
+			navigate('/');
+		} catch (error) {
+			message.error('Login failed');
+		}
 	};
 	const onFinishFailed = (errorInfo) => {
-		console.log('Failed:', errorInfo);
+		message.error('Please enter all data correctly');
 	};
 
 	return (
