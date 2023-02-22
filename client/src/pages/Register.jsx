@@ -1,13 +1,19 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import '../assets/css/authentication.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
-	const onFinish = (values) => {
-		console.log('Success:', values);
+	const onFinish = async (values) => {
+		try {
+			await axios.post('/auth/register', values);
+			message.success('Registration successful');
+		} catch (error) {
+			message.error('Registration failed');
+		}
 	};
 	const onFinishFailed = (errorInfo) => {
-		console.log('Failed:', errorInfo);
+		message.error('Please enter all data correctly integrated');
 	};
 
 	return (
