@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -11,7 +11,11 @@ function App() {
 				<Routes>
 					<Route
 						path="/"
-						element={<Home />}
+						element={
+							<ProtectedRoutes>
+								<Home />
+							</ProtectedRoutes>
+						}
 					/>
 					<Route
 						path="/login"
@@ -28,3 +32,12 @@ function App() {
 }
 
 export default App;
+
+export function ProtectedRoutes(props) {
+	const user = JSON.parse(localStorage.getItem('user'));
+	if (user) {
+		return props.children;
+	} else {
+		return <Navigate to="/login" />;
+	}
+}
