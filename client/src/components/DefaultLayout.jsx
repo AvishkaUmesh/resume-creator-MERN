@@ -1,4 +1,5 @@
 import { Button, Dropdown } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { useNavigate, Link } from 'react-router-dom';
 import '../assets/css/default-layout.css';
 
@@ -48,12 +49,12 @@ const DefaultLayout = ({ children }) => {
 					}}
 					placement="bottomRight"
 				>
-					<Button>{user.username}</Button>
+					<Button icon={<UserOutlined />}>{user.username}</Button>
 				</Dropdown>
 			</div>
 			<div
 				className="content"
-				style={{ overflow: 'scroll' }}
+				style={{ overflow: 'scroll', overflowX: 'hidden' }}
 			>
 				{children}
 			</div>

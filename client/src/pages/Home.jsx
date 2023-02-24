@@ -35,6 +35,7 @@ const Home = () => {
 								<img
 									src={template.image}
 									className="card-img-top"
+									height={400}
 									alt="..."
 								/>
 								<div className="card-body">

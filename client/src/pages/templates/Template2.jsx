@@ -28,9 +28,12 @@ function Template2() {
 			<div className="education mt-3">
 				<h3 style={{ backgroundColor: 'gray', padding: 10 }}>Education</h3>
 				<hr />
-				{user.education.map((education) => {
+				{user.education.map((education, index) => {
 					return (
-						<div className="d-flex align-items-center">
+						<div
+							className="d-flex align-items-center"
+							key={index}
+						>
 							<h6 style={{ width: 120 }}>
 								<b>{education.yearRange} : </b>
 							</h6>
@@ -48,9 +51,12 @@ function Template2() {
 			<div className="experience mt-3">
 				<h3 style={{ backgroundColor: 'gray', padding: 10 }}>Experience</h3>
 				<hr />
-				{user.experience.map((exp) => {
+				{user.experience.map((exp, index) => {
 					return (
-						<div className="d-flex align-items-center">
+						<div
+							className="d-flex align-items-center"
+							key={index}
+						>
 							<h6 style={{ width: 120 }}>
 								<b>{exp.yearRange} : </b>
 							</h6>
@@ -67,9 +73,12 @@ function Template2() {
 			<div className="projects mt-3">
 				<h3 style={{ backgroundColor: 'gray', padding: 10 }}>Projects</h3>
 				<hr />
-				{user.projects.map((project) => {
+				{user.projects.map((project, index) => {
 					return (
-						<div className="d-flex flex-column">
+						<div
+							className="d-flex flex-column"
+							key={index}
+						>
 							<h6>
 								<b>
 									{project.title} [{project.yearRange}]{' '}
@@ -86,8 +95,8 @@ function Template2() {
 			<div className="projects mt-3">
 				<h3 style={{ backgroundColor: 'gray', padding: 10 }}>Skills</h3>
 				<hr />
-				{user.skills.map((skill) => {
-					return <p>{skill.technology}</p>;
+				{user.skills.map((skill, index) => {
+					return <p key={index}>{skill.technology}</p>;
 				})}
 			</div>
 		</div>
