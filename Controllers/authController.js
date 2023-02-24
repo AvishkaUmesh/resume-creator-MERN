@@ -21,3 +21,13 @@ exports.register = async (req, res) => {
 		res.status(500).json(error);
 	}
 };
+
+exports.update = async (req, res) => {
+	try {
+		await User.findOneAndUpdate({ _id: req.body._id }, req.body);
+		const user = await User.findOne({ _id: req.body._id });
+		res.status(200).json(user);
+	} catch (error) {
+		res.status(500).json(error);
+	}
+};

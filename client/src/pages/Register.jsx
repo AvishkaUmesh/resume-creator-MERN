@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 const Register = () => {
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
+	const [form] = Form.useForm();
 
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem('user'));
@@ -19,14 +20,16 @@ const Register = () => {
 		try {
 			await axios.post('/api/auth/register', values);
 			setLoading(false);
-			message.success('Registration successful');
+			form.resetFields();
+			navigate('/login');
+			message.success('Registration successful please login');
 		} catch (error) {
 			setLoading(false);
 			message.error('Registration failed');
 		}
 	};
 	const onFinishFailed = (errorInfo) => {
-		message.error('Please enter all data correctly integrated');
+		message.error('Please enter all data correctly');
 	};
 
 	return (
@@ -34,6 +37,7 @@ const Register = () => {
 			{loading && <Spin size="large" />}
 			{!loading && (
 				<Form
+					form={form}
 					name="register"
 					style={{
 						maxWidth: 400,
@@ -82,6 +86,16 @@ const Register = () => {
 								required: true,
 								message: 'Please confirm password!',
 							},
+							({ getFieldValue }) => ({
+								validator(_, value) {
+									if (!value || getFieldValue('password') === value) {
+										return Promise.resolve();
+									}
+									return Promise.reject(
+										new Error('The two passwords that you entered do not match!')
+									);
+								},
+							}),
 						]}
 					>
 						<Input.Password />

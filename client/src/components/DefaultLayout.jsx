@@ -40,7 +40,7 @@ const DefaultLayout = ({ children }) => {
 					}}
 					placement="bottomRight"
 				>
-					<Button>{user.data.username}</Button>
+					<Button>{user.username}</Button>
 				</Dropdown>
 			</div>
 			<div className="content">{children}</div>
