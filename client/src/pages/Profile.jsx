@@ -49,6 +49,7 @@ const Profile = () => {
 			{!loading && (
 				<div className="update-profile">
 					<h2>Update Profile</h2>
+					<hr />
 					<Form
 						layout="vertical"
 						onFinish={onFinish}
