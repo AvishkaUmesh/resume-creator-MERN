@@ -21,7 +21,7 @@ const Login = () => {
 			const user = await axios.post('/api/auth/login', values);
 			setLoading(false);
 			message.success('Login successful');
-			localStorage.setItem('user', JSON.stringify(user));
+			localStorage.setItem('user', JSON.stringify(user.data));
 			navigate('/');
 		} catch (error) {
 			setLoading(false);

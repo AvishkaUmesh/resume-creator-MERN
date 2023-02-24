@@ -1,5 +1,5 @@
 import { Button, Dropdown } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../assets/css/default-layout.css';
 
 const DefaultLayout = ({ children }) => {
@@ -9,11 +9,11 @@ const DefaultLayout = ({ children }) => {
 	const items = [
 		{
 			key: '1',
-			label: <a href="/">Home</a>,
+			label: <Link to="/">Home</Link>,
 		},
 		{
 			key: '2',
-			label: <a href="/profile">Profile</a>,
+			label: <Link to="/profile">Profile</Link>,
 		},
 		{
 			key: '3',
@@ -40,10 +40,15 @@ const DefaultLayout = ({ children }) => {
 					}}
 					placement="bottomRight"
 				>
-					<Button>{user.data.username}</Button>
+					<Button>{user.username}</Button>
 				</Dropdown>
 			</div>
-			<div className="content">{children}</div>
+			<div
+				className="content"
+				style={{ overflow: 'scroll' }}
+			>
+				{children}
+			</div>
 		</div>
 	);
 };
