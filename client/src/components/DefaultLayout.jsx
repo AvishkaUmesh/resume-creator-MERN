@@ -23,6 +23,7 @@ const DefaultLayout = ({ children }) => {
 						localStorage.removeItem('user');
 						navigate('/login');
 					}}
+					style={{ cursor: 'pointer' }}
 				>
 					Logout
 				</span>
@@ -33,7 +34,14 @@ const DefaultLayout = ({ children }) => {
 	return (
 		<div className="layout">
 			<div className="header">
-				<h1>Resume Creator</h1>
+				<h1
+					onClick={() => {
+						navigate('/');
+					}}
+					style={{ cursor: 'pointer' }}
+				>
+					Resume Creator
+				</h1>
 				<Dropdown
 					menu={{
 						items,
