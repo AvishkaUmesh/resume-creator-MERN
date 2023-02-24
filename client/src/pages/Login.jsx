@@ -25,7 +25,7 @@ const Login = () => {
 			navigate('/');
 		} catch (error) {
 			setLoading(false);
-			message.error('Login failed');
+			message.error(error.response.data.message);
 		}
 	};
 	const onFinishFailed = (errorInfo) => {
