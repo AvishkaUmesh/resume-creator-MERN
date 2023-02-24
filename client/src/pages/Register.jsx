@@ -25,7 +25,7 @@ const Register = () => {
 			message.success('Registration successful please login');
 		} catch (error) {
 			setLoading(false);
-			message.error('Registration failed');
+			message.error(error.response.data.message);
 		}
 	};
 	const onFinishFailed = (errorInfo) => {
