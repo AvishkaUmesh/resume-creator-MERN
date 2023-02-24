@@ -15,17 +15,17 @@ const Template1 = () => {
 						<p>{user.address}</p>
 					</div>
 				</div>
-				<div className="divider mt-5"></div>
+				<div className="divider mt-3"></div>
 
-				<div className="objective mt-5">
+				<div className="objective mt-3">
 					<h3>Objective</h3>
 					<hr />
 					<p>{user.objective}</p>
 				</div>
 
-				<div className="divider mt-5"></div>
+				<div className="divider mt-3"></div>
 
-				<div className="education mt-5">
+				<div className="education mt-3">
 					<h3>Education</h3>
 					<hr />
 					{user.education.map((edu, index) => {
@@ -46,9 +46,9 @@ const Template1 = () => {
 					})}
 				</div>
 
-				<div className="divider mt-5"></div>
+				<div className="divider mt-3"></div>
 
-				<div className="experience mt-5">
+				<div className="experience mt-3">
 					<h3>Experience</h3>
 					<hr />
 					{user.experience.map((exp, index) => {
@@ -69,9 +69,9 @@ const Template1 = () => {
 					})}
 				</div>
 
-				<div className="divider mt-5"></div>
+				<div className="divider mt-3"></div>
 
-				<div className="projects mt-5">
+				<div className="projects mt-3">
 					<h3>Projects</h3>
 					<hr />
 					{user.projects.map((prj, index) => {
@@ -91,9 +91,9 @@ const Template1 = () => {
 					})}
 				</div>
 
-				<div className="divider mt-5"></div>
+				<div className="divider mt-3"></div>
 
-				<div className="skills mt-5">
+				<div className="skills mt-3">
 					<h3>Skills</h3>
 					<hr />
 					{user.skills.map((prj, index) => {
