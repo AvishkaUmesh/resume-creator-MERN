@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
+import Templates from './pages/templates/Templates';
 
 function App() {
 	return (
@@ -23,6 +24,14 @@ function App() {
 						element={
 							<ProtectedRoutes>
 								<Profile />
+							</ProtectedRoutes>
+						}
+					/>
+					<Route
+						path="/templates/:id"
+						element={
+							<ProtectedRoutes>
+								<Templates />
 							</ProtectedRoutes>
 						}
 					/>

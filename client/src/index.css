@@ -46,3 +46,9 @@ textarea:focus {
 	color: black !important;
 	width: 200px !important;
 }
+
+.divider {
+	width: 100%;
+	height: 2px;
+	background-color: gray;
+}

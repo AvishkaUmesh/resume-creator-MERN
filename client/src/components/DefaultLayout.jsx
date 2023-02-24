@@ -43,7 +43,12 @@ const DefaultLayout = ({ children }) => {
 					<Button>{user.username}</Button>
 				</Dropdown>
 			</div>
-			<div className="content">{children}</div>
+			<div
+				className="content"
+				style={{ overflow: 'scroll' }}
+			>
+				{children}
+			</div>
 		</div>
 	);
 };
