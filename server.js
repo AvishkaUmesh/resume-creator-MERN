@@ -1,15 +1,17 @@
 const express = require('express');
+const dotenv = require('dotenv');
+dotenv.config();
 const corsOptions = require('./cors.config');
 const csurf = require('csurf');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 const errorHandler = require('./middlewares/errorHandler');
-const dotenv = require('dotenv');
+const passport = require('./middlewares/passport');
+const session = require('express-session');
 
 const app = express();
 app.use(cors(corsOptions));
-dotenv.config();
 
 const dbConnect = require('./DB/dbConnect');
 app.use(express.json());
@@ -22,6 +24,11 @@ app.use(cookieParser());
 
 // Set up CSRF protection middleware
 const csrfProtection = csurf({ cookie: true });
+
+// Initialize passport and session
+app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 const authRoutes = require('./Routes/authRoutes');

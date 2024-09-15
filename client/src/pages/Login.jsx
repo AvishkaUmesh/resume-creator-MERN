@@ -1,6 +1,7 @@
 import { Button, Form, Input, message, Spin } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import GoogleButton from 'react-google-button';
 import { Link, useNavigate } from 'react-router-dom';
 import '../assets/css/authentication.css';
 
@@ -32,7 +33,9 @@ const Login = () => {
 			});
 			setLoading(false);
 			message.success('Login successful');
-			localStorage.setItem('user', JSON.stringify(user.data));
+			console.log(user.data);
+			localStorage.setItem('user', JSON.stringify(user.data.user));
+			localStorage.setItem('token', user.data.token);
 			navigate('/');
 		} catch (error) {
 			setLoading(false);
@@ -41,6 +44,10 @@ const Login = () => {
 	};
 	const onFinishFailed = (errorInfo) => {
 		message.error('Please enter all data correctly');
+	};
+
+	const handleGoogleLogin = () => {
+		window.location.href = '/api/auth/google';
 	};
 
 	return (
@@ -94,6 +101,11 @@ const Login = () => {
 							<Button type="primary" htmlType="submit">
 								LOGIN
 							</Button>
+						</Form.Item>
+					</div>
+					<div className="d-flex align-center justify-content-between">
+						<Form.Item>
+							<GoogleButton onClick={handleGoogleLogin}>Login with Google</GoogleButton>
 						</Form.Item>
 					</div>
 				</Form>
