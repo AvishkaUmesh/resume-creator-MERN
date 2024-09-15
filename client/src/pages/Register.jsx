@@ -1,11 +1,12 @@
 import { Button, Form, Input, message } from 'antd';
-import '../assets/css/authentication.css';
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import '../assets/css/authentication.css';
 
 const Register = () => {
 	const [loading, setLoading] = useState(false);
+	const [csrfToken, setCsrfToken] = useState('');
 	const navigate = useNavigate();
 	const [form] = Form.useForm();
 
@@ -14,11 +15,21 @@ const Register = () => {
 		if (user) {
 			navigate('/');
 		}
+
+		const fetchCsrfToken = async () => {
+			const { data } = await axios.get('/api/csrf-token');
+			setCsrfToken(data.csrfToken);
+		};
+		fetchCsrfToken();
 	}, []);
 
 	const onFinish = async (values) => {
 		try {
-			await axios.post('/api/auth/register', values);
+			await axios.post('/api/auth/register', values, {
+				headers: {
+					'CSRF-Token': csrfToken,
+				},
+			});
 			setLoading(false);
 			form.resetFields();
 			navigate('/login');
@@ -69,10 +80,12 @@ const Register = () => {
 						label="Password"
 						name="password"
 						rules={[
-							{
-								required: true,
-								message: 'Please input your password!',
-							},
+							{ required: true, message: 'Please input your password!' },
+							{ min: 8, message: 'Password must be at least 8 characters long' },
+							{ pattern: /[A-Z]/, message: 'Password must contain at least one uppercase letter' },
+							{ pattern: /[a-z]/, message: 'Password must contain at least one lowercase letter' },
+							{ pattern: /[0-9]/, message: 'Password must contain at least one number' },
+							{ pattern: /[\W_]/, message: 'Password must contain at least one special character' },
 						]}
 					>
 						<Input.Password />
@@ -104,10 +117,7 @@ const Register = () => {
 					<div className="d-flex align-center justify-content-between">
 						<Link to="/login">Click here to Login</Link>
 						<Form.Item>
-							<Button
-								type="primary"
-								htmlType="submit"
-							>
+							<Button type="primary" htmlType="submit">
 								REGISTER
 							</Button>
 						</Form.Item>
