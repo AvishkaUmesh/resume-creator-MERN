@@ -10,8 +10,7 @@ const PersonalInfo = () => {
 						label="FirstName"
 						rules={[
 							{
-								required: true,
-								message: 'Please enter FistName!',
+								required: true, message: 'Please enter FistName!',
 							},
 						]}
 					>
@@ -24,8 +23,7 @@ const PersonalInfo = () => {
 						label="LastName"
 						rules={[
 							{
-								required: true,
-								message: 'Please enter LastName!',
+								required: true, message: 'Please enter LastName!',
 							},
 						]}
 					>
@@ -38,12 +36,10 @@ const PersonalInfo = () => {
 						label="Email"
 						rules={[
 							{
-								required: true,
-								message: 'Please enter Email!',
+								required: true, message: 'Please enter Email!',
 							},
 							{
-								type: 'email',
-								message: 'The input is not valid E-mail!',
+								type: 'email', message: 'The input is not valid E-mail!',
 							},
 						]}
 					>
@@ -56,12 +52,10 @@ const PersonalInfo = () => {
 						label="Mobile Number"
 						rules={[
 							{
-								required: true,
-								message: 'Please enter Mobile Number!',
+								required: true, message: 'Please enter Mobile Number!',
 							},
 							{
-								pattern: /^[0-9]{10}$/,
-								message: 'Please enter valid Mobile Number!',
+								pattern: /^[0-9]{10}$/, message: 'Please enter valid Mobile Number!',
 							},
 						]}
 					>
@@ -74,13 +68,11 @@ const PersonalInfo = () => {
 						label="LinkedIn Link"
 						rules={[
 							{
-								required: true,
-								message: 'Please enter LinkedIn!',
+								required: true, message: 'Please enter LinkedIn!',
 							},
 							{
 								pattern:
 									/^(https?:\/\/)?(www\.)?((linkedin\.com\/in\/)|(linkedin\.com\/pub\/)|(linkedin\.com\/in\/))([a-zA-Z0-9]+[-_]?[a-zA-Z0-9]+)(\/)?$/,
-
 								message: 'Please enter valid LinkedIn Link!',
 							},
 						]}
@@ -95,8 +87,7 @@ const PersonalInfo = () => {
 						label="Address"
 						rules={[
 							{
-								required: true,
-								message: 'Please enter Address!',
+								required: true, message: 'Please enter Address!',
 							},
 						]}
 					>
@@ -110,8 +101,7 @@ const PersonalInfo = () => {
 						label="Career Objective"
 						rules={[
 							{
-								required: true,
-								message: 'Please enter Career Objective!',
+								required: true, message: 'Please enter Career Objective!',
 							},
 						]}
 					>
