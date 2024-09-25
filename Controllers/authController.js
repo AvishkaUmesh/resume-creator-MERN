@@ -1,31 +1,39 @@
 const User = require('../Models/userModel');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
 	try {
 		const user = await User.findOne({ username: req.body.username });
 		if (user) {
 			const isMatch = await bcrypt.compare(req.body.password, user.password);
 			if (!isMatch) {
-				return res.status(400).json({ message: 'invalid password' });
+				const error = new Error('Invalid password');
+				error.status = 400;
+				throw error;
 			}
-			res.status(200).json(user);
+			const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+			res.status(200).json({ user, token });
 		} else {
-			res.status(404).json({ message: 'user not found' });
+			const error = new Error('User not found');
+			error.status = 404;
+			throw error;
 		}
 	} catch (error) {
-		res.status(500).json(error);
+		next(error);
 	}
 };
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
 	try {
 		const userName = req.body.username;
 		const password = req.body.password;
 		const user = await User.findOne({ username: userName });
 
 		if (user) {
-			return res.status(400).json({ message: 'user already exist' });
+			const error = new Error('User already exists');
+			error.status = 400;
+			throw error;
 		}
 
 		const salt = await bcrypt.genSalt(10);
@@ -33,19 +41,19 @@ exports.register = async (req, res) => {
 		req.body.password = hashPassword;
 
 		const newUser = await User.create(req.body);
-		res.status(201).send('success register');
+		const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+		res.status(201).json({ user: newUser, token });
 	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error, message: 'error register' });
+		next(error);
 	}
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
 	try {
 		await User.findOneAndUpdate({ _id: req.body._id }, req.body);
 		const user = await User.findOne({ _id: req.body._id });
 		res.status(200).json(user);
 	} catch (error) {
-		res.status(500).json(error);
+		next(error);
 	}
 };

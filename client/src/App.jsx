@@ -1,10 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Templates from './pages/templates/Templates';
+import OAuthRedirectHandler from './components/OAuthRedirectHandler';
 
 function App() {
 	return (
@@ -35,14 +36,9 @@ function App() {
 							</ProtectedRoutes>
 						}
 					/>
-					<Route
-						path="/login"
-						element={<Login />}
-					/>
-					<Route
-						path="/register"
-						element={<Register />}
-					/>
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+					<Route path="/oauth-redirect" element={<OAuthRedirectHandler />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

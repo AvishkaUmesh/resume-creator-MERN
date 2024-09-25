@@ -1,11 +1,17 @@
-import { Button, Dropdown } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { useNavigate, Link } from 'react-router-dom';
+import { Button, Dropdown } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
 import '../assets/css/default-layout.css';
 
 const DefaultLayout = ({ children }) => {
 	const user = JSON.parse(localStorage.getItem('user'));
 	const navigate = useNavigate();
+
+	const logout = async () => {
+		await axios.get('/api/auth/logout');
+		localStorage.removeItem('user');
+		navigate('/login');
+	};
 
 	const items = [
 		{
@@ -52,10 +58,7 @@ const DefaultLayout = ({ children }) => {
 					<Button icon={<UserOutlined />}>{user.username}</Button>
 				</Dropdown>
 			</div>
-			<div
-				className="content"
-				style={{ overflow: 'scroll', overflowX: 'hidden' }}
-			>
+			<div className="content" style={{ overflow: 'scroll', overflowX: 'hidden' }}>
 				{children}
 			</div>
 		</div>

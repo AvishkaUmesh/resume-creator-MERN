@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
 		},
 		password: {
 			type: String,
-			required: true,
+			default: '',
 		},
 		email: {
 			type: String,
@@ -44,6 +44,11 @@ const userSchema = new mongoose.Schema(
 		skills: { type: Array, default: [] },
 		experience: { type: Array, default: [] },
 		projects: { type: Array, default: [] },
+		googleId: {
+			type: String,
+			unique: true,
+			sparse: true,
+		},
 	},
 	{ timeStamp: true }
 );
